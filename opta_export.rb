@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'watir-webdriver'
-require 'pry-nav'
 require 'optparse'
 
 options = {}
@@ -57,6 +56,7 @@ end
 game = 2
 while game <= 6
   b.link(id: "ctl00_cphMain_dgLastGame_ctl0#{game}_Hyperlink14").click
+
   output_file.puts b.a(id: "ctl00_cphMain_hplHomeTeam").text
   output_file.puts b.table(id: "ctl00_cphMain_dgHomeLineUp").links.map(&:title).map! {|s| s.gsub(/\n|Grade: |Assist: [1-10]|Goal: [1-10]|Injured|Booked/,",")}.map! {|s| s.gsub(/\,{2,}/,",")}
   output_file.puts ""
@@ -66,8 +66,8 @@ while game <= 6
   output_file.puts ""
   output_file.puts ""
 
-game += 1
-b.back
+  game += 1
+  b.back
 end
 
 b.close
