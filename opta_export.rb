@@ -28,7 +28,7 @@ end
 
 option_parser.parse!
 
-b = Watir::Browser.new
+b = Watir::Browser.new :phantomjs
 output_file = File.open(options[:output_file],"w")
 
 b.goto("xperteleven.com")
