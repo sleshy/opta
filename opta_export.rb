@@ -10,19 +10,20 @@ options[:output_file] = "opta-#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}.csv"
 
 option_parser = OptionParser.new do |opts|
 
-	opts.banner = "Usage: ./opta_export.rb [options]"
+  opts.banner = "Usage: ./opta_export.rb [options]"
+ 
+  opts.on("-c", "--current_league [league]", "Set what CAPSL division you're currently in. Default is A.") do |league|
+    options[:current_league] = league.capitalize
+  end
 
-	opts.on("-c", "--current_league [league]", "Set what CAPSL division you're currently in. Default is A.") do |league|
-		options[:current_league] = league.capitalize
-	end
+  opts.on("-s", "--league_scouting [league]", "Set what CAPSL division you'd like to scout. Default is A.") do |league|
+    options[:league_scouting] = league.capitalize
+  end
 
-	opts.on("-s", "--league_scouting [league]", "Set what CAPSL division you'd like to scout. Default is A.") do |league|
-		options[:league_scouting] = league.capitalize
-	end
-
-	opts.on("-o", "--output-file <output file>", "Set file for results output (default is opta-time.csv)") do |output_file|
+  opts.on("-o", "--output-file <output file>", "Set file for results output (default is opta-time.csv)") do |output_file|
     options[:output_file] = output_file
   end
+
 end
 
 option_parser.parse!
@@ -76,3 +77,4 @@ output_file.close
 puts "output file: #{options[:output_file]}"
 
 exit
+
